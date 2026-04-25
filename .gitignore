@@ -67,3 +67,40 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# Keil build outputs
+Objects/
+Listings/
+Debug/
+Build/
+
+# Compiled files
+*.o
+*.d
+*.crf
+*.lst
+*.map
+*.lnp
+*.axf
+*.elf
+*.hex
+*.bin
+*.lib
+*.dep
+
+# Keil temporary/user files
+*.uvguix.*
+*.uvgui.*
+*.uvopt
+*.uvoptx.bak
+*.uvprojx.bak
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code optional
+.vscode/

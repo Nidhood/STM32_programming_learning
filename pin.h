@@ -4,4 +4,6 @@
 #include "stm32f.h"
 #include "bit.h"
 
+class Pin {};
+
 #endif
