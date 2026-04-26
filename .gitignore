@@ -1,106 +1,122 @@
-# Prerequisites
-*.d
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.log
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# VS Code
+.vscode/*
+!.vscode/extensions.json
 
-# Precompiled Headers
-*.gch
-*.pch
+# clangd / cache
+.cache/
+.clangd.cache/
+**/.cache/
+**/.cache/clangd/
 
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.so.*
-
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Build directories
+# Build outputs
 build/
 Build/
 build-*/
+cmake-build-*/
+out/
+tmp/
+Objects/
+Listings/
+Debug/
+DebugConfig/
 
-# CMake generated files
+# CMSIS / Keil generated
+.cmsis/
+RTE/
+*.cbuild-run.yml
+*.cbuild.yml
+*.cbuild-idx.yml
+*.cbuild-pack.yml
+*.dbgconf
+*.dbgconf.base@*
+*.dbgconf.update@*
+uv2csolution.log
+
+# STM32CubeMX generated/temporary
+STM32CubeMX/**/project.script
+
+# CMake / Ninja
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
-Makefile
 install_manifest.txt
+Makefile
+build.ninja
+.ninja_deps
+.ninja_log
 compile_commands.json
 
-# Temporary files
-*.tmp
-*.log
-*.bak
-*.swp
+# Object / dependency files
+*.o
+*.obj
+*.lo
+*.slo
+*.d
+*.dep
+*.dwo
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Firmware / executable outputs
+*.elf
+*.axf
+*.hex
+*.bin
+*.out
+*.exe
+*.app
+
+# Linker / listing / reports
+*.map
+*.lst
+*.crf
+*.lnp
+*.htm
+*.html
+
+# Libraries
+*.a
+*.lib
+*.la
+*.lai
+*.so
+*.so.*
+*.dll
+*.dylib
+
+# Debug symbols
+*.pdb
+*.ilk
+
+# Keil uVision user files
+*.uvguix.*
+*.uvgui.*
+*.uvguix
+*.uvgui
+*.uvopt
+*.uvoptx
+*.uvoptx.bak
+*.uvprojx.bak
 
 # vcpkg
 vcpkg_installed/
 
-# debug information files
-*.dwo
-
-# test output & cache
+# Tests
 Testing/
-.cache/
 
-# Keil build outputs
-Objects/
-Listings/
-Debug/
-Build/
-
-# Compiled files
-*.o
-*.d
-*.crf
-*.lst
-*.map
-*.lnp
-*.axf
-*.elf
-*.hex
-*.bin
-*.lib
-*.dep
-
-# Keil temporary/user files
-*.uvguix.*
-*.uvgui.*
-*.uvopt
-*.uvoptx.bak
-*.uvprojx.bak
-
-# Logs
-*.log
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# VS Code optional
-.vscode/
+# Fortran
+*.mod
+*.smod

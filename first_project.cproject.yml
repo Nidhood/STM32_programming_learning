@@ -1,0 +1,105 @@
+project:
+  output:
+    type:
+      - elf
+      - hex
+      - map
+
+  packs:
+    - pack: ARM::CMSIS@^6.3.0
+    - pack: Keil::STM32F4xx_DFP@^2.17.0
+    - pack: ARM::CMSIS-NN@^4.0.0
+    - pack: ARM::CMSIS-DSP@^1.10.1
+
+  setups:
+    - setup: Options for NUCLEO_F401RE_Debug
+      processor:
+        fpu: sp
+
+      debug: "on"
+
+      misc:
+        - C:
+            - -std=c99
+
+          C-CPP:
+            - -funsigned-char
+            - -fshort-enums
+            - -fshort-wchar
+            - -ffunction-sections
+            - -fdata-sections
+            - -Wall
+            - -Wextra
+            - -Wno-packed
+            - -Wno-reserved-id-macro
+            - -Wno-unused-macros
+            - -Wno-documentation-unknown-command
+            - -Wno-documentation
+            - -Wno-license-management
+            - -Wno-parentheses-equality
+
+          CPP:
+            - -xc++
+            - -std=c++11
+            - -fno-rtti
+            - -fno-exceptions
+
+          ASM:
+            - -masm=auto
+
+          Link:
+            - --map
+            - --load_addr_map_info
+            - --xref
+            - --callgraph
+            - --symbols
+            - --info sizes
+            - --info totals
+            - --info unused
+            - --info veneers
+            - --info summarysizes
+            - --strict
+            - --summary_stderr
+
+  groups:
+    - group: include
+      groups:
+        - group: core
+          files:
+            - file: bit.h
+            - file: delay.h
+            - file: stm32f4xx.h
+
+        - group: drivers
+          files:
+            - file: pin.h
+            - file: timer.h
+            - file: pwm.h
+            - file: i2c.h
+            - file: i2cbus.h
+
+        - group: boards
+          files:
+            - file: board_nucleo_f401re.h
+
+    - group: src
+      groups:
+        - group: core
+          files:
+            - file: delay.cpp
+
+        - group: drivers
+          files:
+            - file: pin.cpp
+            - file: timer.cpp
+            - file: pwm.cpp
+            - file: i2c.cpp
+            - file: i2cbus.cpp
+
+        - group: app
+          files:
+            - file: main.cpp
+
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: Keil::Device:Startup

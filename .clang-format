@@ -1,0 +1,56 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+
+# Indentation style
+UseTab: Always
+IndentWidth: 4
+TabWidth: 4
+ContinuationIndentWidth: 4
+
+# Braces style
+BreakBeforeBraces: Attach
+
+# Switch/case indentation
+IndentCaseLabels: true
+IndentCaseBlocks: false
+
+# Keep namespace content without extra indentation
+NamespaceIndentation: None
+FixNamespaceComments: true
+
+# Class access modifiers like:
+#   private:
+#       member;
+IndentAccessModifiers: true
+AccessModifierOffset: 0
+EmptyLineBeforeAccessModifier: Always
+
+# Parentheses style
+# void pwmInit( unsigned char tmr, double fre );
+SpaceBeforeParens: Never
+SpacesInParentheses: true
+SpaceInEmptyParentheses: false
+
+# Comments aligned at the end of declarations
+AlignTrailingComments: true
+
+# Do not reorder includes automatically
+SortIncludes: false
+
+# Do not aggressively wrap your code
+ColumnLimit: 0
+ReflowComments: false
+
+# Short code blocks
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+
+# Pointers/references
+PointerAlignment: Right
+ReferenceAlignment: Pointer
+
+# Empty lines
+MaxEmptyLinesToKeep: 1
