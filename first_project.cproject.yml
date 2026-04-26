@@ -77,6 +77,7 @@ project:
             - file: pwm.h
             - file: i2c.h
             - file: i2cbus.h
+            - file: usart.h
 
         - group: boards
           files:
@@ -95,6 +96,7 @@ project:
             - file: pwm.cpp
             - file: i2c.cpp
             - file: i2cbus.cpp
+            - file: usart.cpp
 
         - group: app
           files:
