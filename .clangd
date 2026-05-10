@@ -415,7 +415,7 @@ CompileFlags:
     - >-
       -IC:/Users/ivanm/OneDrive/Documentos/Github/STM32_programming_learning/RTE/_NUCLEO_F401RE_Debug
     - >-
-      -IC:/Users/ivanm/AppData/Local/Arm/Packs/ARM/CMSIS/6.3.0/CMSIS/Core/Include
+      -IC:/Users/ivanm/AppData/Local/stm32cube/packs/ARM/CMSIS/6.3.0/CMSIS/Core/Include
     - >-
-      -IC:/Users/ivanm/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+      -IC:/Users/ivanm/AppData/Local/stm32cube/packs/Keil/STM32F4xx_DFP/2.17.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include
     - '-IC:/Users/ivanm/OneDrive/Documentos/Github/STM32_programming_learning/.'

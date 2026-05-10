@@ -78,6 +78,18 @@ project:
             - file: i2c.h
             - file: i2cbus.h
             - file: usart.h
+            - file: dfrobot_i2c_multiplexer.h
+            - file: dma.h
+            - file: flash.h
+            - file: magnetic_angle_sensor.h
+            - file: as5600_encoder.h
+            - file: mt6701_encoder.h
+            - file: magnetic_encoder_manager.h
+            - file: app_config.h
+            - file: magnetic_encoder_app.h
+            - file: servo_controller.h
+            - file: pca9685_servo_controller.h
+            - file: servo_control_app.h
 
         - group: boards
           files:
@@ -97,6 +109,15 @@ project:
             - file: i2c.cpp
             - file: i2cbus.cpp
             - file: usart.cpp
+            - file: dfrobot_i2c_multiplexer.cpp
+            - file: dma.cpp
+            - file: flash.cpp
+            - file: as5600_encoder.cpp
+            - file: mt6701_encoder.cpp
+            - file: magnetic_encoder_manager.cpp
+            - file: magnetic_encoder_app.cpp
+            - file: pca9685_servo_controller.cpp
+            - file: servo_control_app.cpp
 
         - group: app
           files:
