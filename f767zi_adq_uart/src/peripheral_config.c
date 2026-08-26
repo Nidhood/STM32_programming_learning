@@ -147,8 +147,8 @@ void TIM2_Init( void ) {
 
 	// 1. Verifica que las frecuencias seleccionadas puedan generarse exactamente.
 	if ( ( SAMPLE_RATE_HZ == 0U ) || ( SAMPLE_RATE_HZ >= TIMER_TICK_HZ ) ||
-		 ( TIMER_INPUT_CLOCK_HZ % TIMER_TICK_HZ != 0U ) ||
-		 ( TIMER_TICK_HZ % SAMPLE_RATE_HZ != 0U ) ) {
+		 ( TIMER_INPUT_CLOCK_HZ % TIMER_TICK_HZ != 0U ) ) {
+
 		Error_Handler();
 	}
 
@@ -156,7 +156,13 @@ void TIM2_Init( void ) {
 	htim2.Instance = TIM2;
 	htim2.Init.Prescaler = ( TIMER_INPUT_CLOCK_HZ / TIMER_TICK_HZ ) - 1U;
 	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim2.Init.Period = ( TIMER_TICK_HZ / SAMPLE_RATE_HZ ) - 1U;
+	uint32_t period_ticks = ( TIMER_TICK_HZ + ( SAMPLE_RATE_HZ / 2U ) ) / SAMPLE_RATE_HZ;
+
+	if ( period_ticks == 0U ) {
+		Error_Handler();
+	}
+
+	htim2.Init.Period = period_ticks - 1U;
 	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
 

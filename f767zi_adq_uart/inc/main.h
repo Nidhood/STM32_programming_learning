@@ -40,6 +40,8 @@
 #define DEBUG_SLEEP_PORT GPIOC
 #define DEBUG_SLEEP_PIN GPIO_PIN_7
 
+#define TEST6_INTEGRITY_TAG_ENABLED 0U
+
 // Handles globales de los periféricos utilizados por la aplicación.
 extern ADC_HandleTypeDef hadc1;
 extern TIM_HandleTypeDef htim2;

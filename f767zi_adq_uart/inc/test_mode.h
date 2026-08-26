@@ -9,7 +9,7 @@
 
 // Selecciona el modo que se compilará.
 #ifndef APP_EXECUTION_MODE
-#define APP_EXECUTION_MODE APP_MODE_INTERRUPTS
+#define APP_EXECUTION_MODE APP_MODE_LOW_POWER
 #endif
 
 // Elimina la interrupción periódica de SysTick durante el ensayo.

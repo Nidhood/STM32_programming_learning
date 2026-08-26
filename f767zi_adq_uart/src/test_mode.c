@@ -24,6 +24,10 @@ static volatile uint16_t tx_tail;
 static uint8_t sample_block[FRAME_PAYLOAD_BYTES];
 static uint8_t sample_block_count;
 
+#if ( TEST6_INTEGRITY_TAG_ENABLED == 1U )
+static uint8_t integrity_sequence;
+#endif
+
 // Variables compartidas entre la adquisición y el procesamiento principal.
 static volatile bool adc_busy;
 static volatile bool sample_ready;
@@ -58,6 +62,11 @@ void AppMode_Init( void ) {
 	tx_head = 0U;
 	tx_tail = 0U;
 	sample_block_count = 0U;
+
+#if ( TEST6_INTEGRITY_TAG_ENABLED == 1U )
+	integrity_sequence = 0U;
+#endif
+
 	adc_busy = false;
 	sample_ready = false;
 	pending_sample = 0U;
@@ -151,14 +160,9 @@ void ADC_PollTask( void ) {
 	// 1. Verifica que exista una conversión activa y que el ADC terminó la conversión.
 	if ( adc_busy && ( __HAL_ADC_GET_FLAG( &hadc1, ADC_FLAG_EOC ) != RESET ) ) {
 
-		uint16_t sample = (uint16_t)HAL_ADC_GetValue( &hadc1 );
-
 		// Resultado adquirido y almacenado.
 		Performance_ADCEnd();
-
-		if ( HAL_ADC_Stop( &hadc1 ) != HAL_OK ) {
-			Error_Handler();
-		}
+		uint16_t sample = (uint16_t)HAL_ADC_GetValue( &hadc1 );
 
 		adc_busy = false;
 
@@ -293,15 +297,32 @@ void LowPower_SleepIfIdle( void ) {
 
 // Empaqueta cada muestra de 12 bits en dos bytes y genera una trama al completar el bloque.
 static void SerialPlot_AddSample( uint16_t sample ) {
+
 	uint16_t index = (uint16_t)( 2U * sample_block_count );
 
-	// 1. Guarda la muestra en formato little-endian dentro del bloque actual.
+#if ( TEST6_INTEGRITY_TAG_ENABLED == 1U )
+
+	uint16_t tagged_sample =
+		( sample & 0x0FFFU ) | ( (uint16_t)( integrity_sequence & 0x0FU ) << 12U );
+
+	sample_block[index] = (uint8_t)( tagged_sample & 0xFFU );
+
+	sample_block[index + 1U] = (uint8_t)( ( tagged_sample >> 8U ) & 0xFFU );
+
+	integrity_sequence = (uint8_t)( ( integrity_sequence + 1U ) & 0x0FU );
+
+#else
+
 	sample_block[index] = (uint8_t)( sample & 0xFFU );
+
 	sample_block[index + 1U] = (uint8_t)( ( sample >> 8U ) & 0x0FU );
+
+#endif
+
 	sample_block_count++;
 
-	// 2. Cuando se completa la trama, intenta almacenarla en el buffer circular de UART.
 	if ( sample_block_count == FRAME_SAMPLES ) {
+
 		generated_frames++;
 		Performance_FrameReadyEvent();
 
@@ -411,11 +432,11 @@ void HAL_ADC_ConvCpltCallback( ADC_HandleTypeDef *adc ) {
 	if ( adc->Instance != ADC1 )
 		return;
 
-	// 2. Recupera el resultado de la conversión.
-	uint16_t sample = (uint16_t)HAL_ADC_GetValue( adc );
-
-	// 3. El resultado ya fue almacenado: termina la medición ADC.
+	// 2. El resultado ya fue almacenado: termina la medición ADC.
 	Performance_ADCEnd();
+
+	// 3. Recupera el resultado de la conversión.
+	uint16_t sample = (uint16_t)HAL_ADC_GetValue( adc );
 
 	// 4. Libera el ADC para permitir la siguiente adquisición.
 	adc_busy = false;
